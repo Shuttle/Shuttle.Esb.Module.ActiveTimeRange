@@ -5,15 +5,18 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 {
     public class ActiveTimeRangeModule : IDisposable, IThreadState
     {
-        private readonly ActiveTimeRange _activeTimeRange = new ActiveTimeRangeConfiguration().CreateActiveTimeRange();
+	    private readonly ActiveTimeRange _activeTimeRange;
         private readonly string _startupPipelineName = typeof (StartupPipeline).FullName;
         private volatile bool _active;
 
-        public ActiveTimeRangeModule(IPipelineFactory pipelineFactory)
+        public ActiveTimeRangeModule(IPipelineFactory pipelineFactory, IActiveTimeRangeConfiguration activeTimeRangeConfiguration )
         {
-            Guard.AgainstNull(pipelineFactory, "pipelineFactory");
+	        Guard.AgainstNull(pipelineFactory, "pipelineFactory");
+	        Guard.AgainstNull(activeTimeRangeConfiguration, "activeTimeRangeConfiguration");
 
-            pipelineFactory.PipelineCreated += PipelineCreated;
+			_activeTimeRange = activeTimeRangeConfiguration.CreateActiveTimeRange();
+
+			pipelineFactory.PipelineCreated += PipelineCreated;
         }
 
         public void Dispose()
