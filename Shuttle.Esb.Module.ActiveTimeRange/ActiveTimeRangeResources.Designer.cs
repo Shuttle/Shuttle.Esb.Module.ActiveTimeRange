@@ -61,15 +61,6 @@ namespace Shuttle.Esb.Module.ActiveTimeRange {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Published DistributorCapabilityEvent for work queue uri &apos;{0}&apos;..
-        /// </summary>
-        public static string DistributorCapabilityEventPublishedx {
-            get {
-                return ResourceManager.GetString("DistributorCapabilityEventPublishedx", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ActiveFromTime &apos;{0}&apos; is not a valid time..
         /// </summary>
         public static string InvalidActiveFromTime {
@@ -84,60 +75,6 @@ namespace Shuttle.Esb.Module.ActiveTimeRange {
         public static string InvalidActiveToTime {
             get {
                 return ResourceManager.GetString("InvalidActiveToTime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Interface &apos;IPurgeQueue&apos; has not been implemented on queue type &apos;{0}&apos;..
-        /// </summary>
-        public static string IPurgeQueueNotImplemented {
-            get {
-                return ResourceManager.GetString("IPurgeQueueNotImplemented", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Published MessageTypeHandlerCapabilityEvent for message type &apos;{0}&apos; on work queue uri &apos;{1}&apos;..
-        /// </summary>
-        public static string MessageTypeHandlerCapabilityEventPublished {
-            get {
-                return ResourceManager.GetString("MessageTypeHandlerCapabilityEventPublished", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Published MessageTypePublisherCapabilityEvent for message type &apos;{0}&apos; on work queue uri &apos;{1}&apos;..
-        /// </summary>
-        public static string MessageTypePublisherCapabilityEventPublished {
-            get {
-                return ResourceManager.GetString("MessageTypePublisherCapabilityEventPublished", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Published MessageTypeSenderCapabilityEvent for message type &apos;{0}&apos; on work queue uri &apos;{1}&apos;..
-        /// </summary>
-        public static string MessageTypeSenderCapabilityEventPublished {
-            get {
-                return ResourceManager.GetString("MessageTypeSenderCapabilityEventPublished", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Forwarding transport message type &apos;{0}&apos; with id &apos;{1}&apos; to &apos;{2}&apos;..
-        /// </summary>
-        public static string TraceForwarding {
-            get {
-                return ResourceManager.GetString("TraceForwarding", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Published WorkerCapabilityEvent for work queue uri &apos;{0}&apos;..
-        /// </summary>
-        public static string WorkerCapabilityEventPublished {
-            get {
-                return ResourceManager.GetString("WorkerCapabilityEventPublished", resourceCulture);
             }
         }
     }
