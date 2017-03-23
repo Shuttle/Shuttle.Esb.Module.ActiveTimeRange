@@ -16,4 +16,4 @@ The module will attach the `ActiveTimeRangeObserver` to the `OnPipelineStarting`
 
 The default value of "*" ignores the value.  If both `from` and `to` are specified as "*" no pipeline will be aborted.
 
-The module will register/resolve itself using [Shuttle.Core container bootstrapping](http://shuttle.github.io/shuttle-core/overview-container/#bootstrapping).
+The module will register itself using the [container bootstrapping](http://shuttle.github.io/shuttle-core/overview-container/#Bootstrapping).
