@@ -7,6 +7,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
     {
 	    private readonly ActiveTimeRange _activeTimeRange;
         private readonly string _startupPipelineName = typeof (StartupPipeline).FullName;
+        private readonly string _shutdownPipelineName = typeof (ShutdownPipeline).FullName;
         private volatile bool _active;
 
         public ActiveTimeRangeModule(IPipelineFactory pipelineFactory, IActiveTimeRangeConfiguration activeTimeRangeConfiguration )
@@ -31,7 +32,11 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
         private void PipelineCreated(object sender, PipelineEventArgs e)
         {
-            if (e.Pipeline.GetType().FullName.Equals(_startupPipelineName, StringComparison.InvariantCultureIgnoreCase))
+            var pipelineName = e.Pipeline.GetType().FullName;
+
+            if (pipelineName.Equals(_startupPipelineName, StringComparison.InvariantCultureIgnoreCase)
+                ||
+                pipelineName.Equals(_shutdownPipelineName, StringComparison.InvariantCultureIgnoreCase))
             {
                 return;
             }

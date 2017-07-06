@@ -20,7 +20,6 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
 			registry.AttemptRegister(ActiveTimeRangeSection.Configuration());
 			registry.AttemptRegister<ActiveTimeRangeModule>();
-			registry.AttemptRegister<ActiveTimeRangeObserver>();
 
 			_registryBootstrapCalled = true;
 		}
