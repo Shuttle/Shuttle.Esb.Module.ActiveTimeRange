@@ -12,7 +12,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
 		public ActiveTimeRangeObserver(IThreadState state, ActiveTimeRange activeTimeRange)
 		{
-			Guard.AgainstNull(state, "state");
+			Guard.AgainstNull(state, nameof(state));
 
 			_state = state;
 			_activeTimeRange = activeTimeRange;

@@ -12,7 +12,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
         public void Register(IComponentRegistry registry)
         {
-            Guard.AgainstNull(registry, "registry");
+            Guard.AgainstNull(registry, nameof(registry));
 
             if (_registryBootstrapCalled)
             {
@@ -24,7 +24,6 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
                 registry.AttemptRegisterInstance(ActiveTimeRangeSection.Configuration());
             }
 
-
             registry.AttemptRegister<ActiveTimeRangeModule>();
 
             _registryBootstrapCalled = true;
@@ -32,7 +31,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
         public void Resolve(IComponentResolver resolver)
         {
-            Guard.AgainstNull(resolver, "resolver");
+            Guard.AgainstNull(resolver, nameof(resolver));
 
             if (_resolverBootstrapCalled)
             {

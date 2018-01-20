@@ -15,8 +15,8 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
         public ActiveTimeRangeModule(IPipelineFactory pipelineFactory,
             IActiveTimeRangeConfiguration activeTimeRangeConfiguration)
         {
-            Guard.AgainstNull(pipelineFactory, "pipelineFactory");
-            Guard.AgainstNull(activeTimeRangeConfiguration, "activeTimeRangeConfiguration");
+            Guard.AgainstNull(pipelineFactory, nameof(pipelineFactory));
+            Guard.AgainstNull(activeTimeRangeConfiguration, nameof(activeTimeRangeConfiguration));
 
             _activeTimeRange = activeTimeRangeConfiguration.CreateActiveTimeRange();
 
