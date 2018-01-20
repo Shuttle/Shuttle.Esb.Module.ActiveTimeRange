@@ -20,12 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="Shuttle.Core.Configuration">
-            <HintPath>..\..\..\..\Users\Eben.Roux\.nuget\packages\shuttle.core.configuration\10.0.0\lib\net46\Shuttle.Core.Configuration.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
       <None Update="config-files\ActiveTimeRange-Grouped.config">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
