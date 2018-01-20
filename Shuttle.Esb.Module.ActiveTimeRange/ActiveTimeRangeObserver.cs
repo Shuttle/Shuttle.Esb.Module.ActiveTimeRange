@@ -1,4 +1,6 @@
-﻿using Shuttle.Core.Infrastructure;
+﻿using Shuttle.Core.Contract;
+using Shuttle.Core.Pipelines;
+using Shuttle.Core.Threading;
 
 namespace Shuttle.Esb.Module.ActiveTimeRange
 {
@@ -18,7 +20,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
 		public void Execute(OnPipelineStarting pipelineEvent)
 		{
-			const int SLEEP = 15000;
+			const int sleep = 15000;
 
 			if (_activeTimeRange.Active())
 			{
@@ -27,7 +29,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
 			pipelineEvent.Pipeline.Abort();
 
-			ThreadSleep.While(SLEEP, _state);
+			ThreadSleep.While(sleep, _state);
 		}
 	}
 }

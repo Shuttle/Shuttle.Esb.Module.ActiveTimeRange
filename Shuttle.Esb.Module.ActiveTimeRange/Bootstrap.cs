@@ -1,41 +1,47 @@
-﻿using Shuttle.Core.Infrastructure;
+﻿using Shuttle.Core.Container;
+using Shuttle.Core.Contract;
 
 namespace Shuttle.Esb.Module.ActiveTimeRange
 {
-	public class Bootstrap:
-		IComponentRegistryBootstrap,
-		IComponentResolverBootstrap
-	{
-		private static bool _registryBootstrapCalled;
-		private static bool _resolverBootstrapCalled;
+    public class Bootstrap :
+        IComponentRegistryBootstrap,
+        IComponentResolverBootstrap
+    {
+        private static bool _registryBootstrapCalled;
+        private static bool _resolverBootstrapCalled;
 
-		public void Register(IComponentRegistry registry)
-		{
-			Guard.AgainstNull(registry, "registry");
+        public void Register(IComponentRegistry registry)
+        {
+            Guard.AgainstNull(registry, "registry");
 
-			if (_registryBootstrapCalled)
-			{
-				return;
-			}
+            if (_registryBootstrapCalled)
+            {
+                return;
+            }
 
-			registry.AttemptRegister(ActiveTimeRangeSection.Configuration());
-			registry.AttemptRegister<ActiveTimeRangeModule>();
+            if (!registry.IsRegistered<IActiveTimeRangeConfiguration>())
+            {
+                registry.AttemptRegisterInstance(ActiveTimeRangeSection.Configuration());
+            }
 
-			_registryBootstrapCalled = true;
-		}
 
-		public void Resolve(IComponentResolver resolver)
-		{
-			Guard.AgainstNull(resolver, "resolver");
+            registry.AttemptRegister<ActiveTimeRangeModule>();
 
-			if (_resolverBootstrapCalled)
-			{
-				return;
-			}
+            _registryBootstrapCalled = true;
+        }
 
-			resolver.Resolve<ActiveTimeRangeModule>();
+        public void Resolve(IComponentResolver resolver)
+        {
+            Guard.AgainstNull(resolver, "resolver");
 
-			_resolverBootstrapCalled = true;
-		}
-	}
+            if (_resolverBootstrapCalled)
+            {
+                return;
+            }
+
+            resolver.Resolve<ActiveTimeRangeModule>();
+
+            _resolverBootstrapCalled = true;
+        }
+    }
 }
