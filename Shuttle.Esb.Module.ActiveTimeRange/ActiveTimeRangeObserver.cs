@@ -1,20 +1,14 @@
-﻿using Shuttle.Core.Contract;
-using Shuttle.Core.Pipelines;
+﻿using Shuttle.Core.Pipelines;
 using Shuttle.Core.Threading;
 
 namespace Shuttle.Esb.Module.ActiveTimeRange
 {
 	internal class ActiveTimeRangeObserver : IPipelineObserver<OnPipelineStarting>
 	{
-		private readonly IThreadState _state;
-
 		private readonly ActiveTimeRange _activeTimeRange;
 
-		public ActiveTimeRangeObserver(IThreadState state, ActiveTimeRange activeTimeRange)
+		public ActiveTimeRangeObserver(ActiveTimeRange activeTimeRange)
 		{
-			Guard.AgainstNull(state, nameof(state));
-
-			_state = state;
 			_activeTimeRange = activeTimeRange;
 		}
 
@@ -29,7 +23,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
 			pipelineEvent.Pipeline.Abort();
 
-			ThreadSleep.While(sleep, _state);
+            ThreadSleep.While(sleep, pipelineEvent.Pipeline.State.GetActiveState());
 		}
 	}
 }
