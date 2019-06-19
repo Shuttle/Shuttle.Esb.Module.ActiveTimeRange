@@ -23,7 +23,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
 			pipelineEvent.Pipeline.Abort();
 
-            ThreadSleep.While(sleep, pipelineEvent.Pipeline.State.GetActiveState());
+            ThreadSleep.While(sleep, pipelineEvent.Pipeline.State.GetCancellationToken());
 		}
 	}
 }
