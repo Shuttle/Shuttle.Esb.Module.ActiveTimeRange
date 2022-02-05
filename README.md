@@ -16,4 +16,8 @@ The module will attach the `ActiveTimeRangeObserver` to the `OnPipelineStarting`
 
 The default value of "\*" ignores the value.  If both `from` and `to` are specified as "\*" no pipeline will be aborted.
 
-The module will register itself using the [container bootstrapping](http://shuttle.github.io/shuttle-core/overview-container/#Bootstrapping).
+# Registration / Activation
+
+The required components may be registered by calling `ComponentRegistryExtensions.RegisterActiveTimeRange(IComponentRegistry)`.
+
+In order for the module to attach to the `IPipelineFactory` you would need to resolve it using `IComponentResolver.Resolve<ActiveTimeRangeModule>()`.
