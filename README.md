@@ -20,7 +20,7 @@ The module will attach the `ActiveTimeRangeObserver` to the `OnPipelineStarting`
 
 The default value of "\*" ignores the value.  If both `from` and `to` are specified as "\*" no pipeline will be aborted.
 
-# Registration / Activation
+## Registration / Activation
 
 The required components may be registered by calling `ComponentRegistryExtensions.RegisterActiveTimeRange(IComponentRegistry)`.
 
