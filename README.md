@@ -1,4 +1,8 @@
-# Shuttle.Esb.Module.ActiveTimeRange
+# Active Time Range
+
+```
+PM> Install-Package Shuttle.Esb.Module.ActiveTimeRange
+```
 
 The ActiveTimeRange module for Shuttle.Esb aborts pipeline processing when the current date is not within a given time range.
 
