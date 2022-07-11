@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Options;
 using Shuttle.Core.Contract;
 using Shuttle.Core.Pipelines;
 
@@ -10,13 +11,13 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
         private readonly string _shutdownPipelineName = typeof(ShutdownPipeline).FullName;
         private readonly string _startupPipelineName = typeof(StartupPipeline).FullName;
 
-        public ActiveTimeRangeModule(IPipelineFactory pipelineFactory,
-            IActiveTimeRangeConfiguration activeTimeRangeConfiguration)
+        public ActiveTimeRangeModule(IOptions<ActiveTimeRangeOptions> activeTimeRangeOptions, IPipelineFactory pipelineFactory)
         {
+            Guard.AgainstNull(activeTimeRangeOptions, nameof(activeTimeRangeOptions));
+            Guard.AgainstNull(activeTimeRangeOptions.Value, nameof(activeTimeRangeOptions.Value));
             Guard.AgainstNull(pipelineFactory, nameof(pipelineFactory));
-            Guard.AgainstNull(activeTimeRangeConfiguration, nameof(activeTimeRangeConfiguration));
 
-            _activeTimeRange = activeTimeRangeConfiguration.CreateActiveTimeRange();
+            _activeTimeRange = new ActiveTimeRange(activeTimeRangeOptions.Value.ActiveFromTime, activeTimeRangeOptions.Value.ActiveToTime);
 
             pipelineFactory.PipelineCreated += PipelineCreated;
         }
