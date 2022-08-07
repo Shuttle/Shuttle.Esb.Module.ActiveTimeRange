@@ -7,6 +7,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
     public class ActiveTimeRangeBuilder
     {
         private ActiveTimeRangeOptions _activeTimeRangeOptions = new ActiveTimeRangeOptions();
+
         public IServiceCollection Services { get; }
 
         public ActiveTimeRangeBuilder(IServiceCollection services)

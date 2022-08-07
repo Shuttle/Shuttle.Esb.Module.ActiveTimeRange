@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shuttle.Core.Contract;
+using Shuttle.Core.Pipelines;
 
 namespace Shuttle.Esb.Module.ActiveTimeRange
 {
@@ -16,7 +17,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
             builder?.Invoke(activeTimeRangeBuilder);
 
-            serviceBusBuilder.Services.TryAddSingleton<ActiveTimeRangeModule, ActiveTimeRangeModule>();
+            serviceBusBuilder.Services.TryAddSingleton<ActiveTimeRangeObserver, ActiveTimeRangeObserver>();
             
             serviceBusBuilder.Services.AddOptions<ActiveTimeRangeOptions>().Configure(options =>
             {
@@ -24,7 +25,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
                 options.ActiveToTime = activeTimeRangeBuilder.Options.ActiveToTime;
             });
 
-            serviceBusBuilder.AddModule<ActiveTimeRangeModule>();
+            serviceBusBuilder.Services.AddPipelineModule<ActiveTimeRangeModule>();
 
             return serviceBusBuilder;
         }
