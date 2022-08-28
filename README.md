@@ -14,6 +14,7 @@ services.AddActiveTimeRangeModule(builder => {
 	builder.Options.ActiveToTime = "14:00";
 });
 ```
+
 The default JSON settings structure is as follows:
 
 ```json
