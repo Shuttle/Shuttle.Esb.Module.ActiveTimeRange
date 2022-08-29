@@ -8,26 +8,26 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 {
     public static class ServiceBusBuilderExtensions
     {
-        public static ServiceBusBuilder AddActiveTimeRangeModule(this ServiceBusBuilder serviceBusBuilder,
+        public static IServiceCollection AddActiveTimeRangeModule(this IServiceCollection services,
             Action<ActiveTimeRangeBuilder> builder = null)
         {
-            Guard.AgainstNull(serviceBusBuilder, nameof(serviceBusBuilder));
+            Guard.AgainstNull(services, nameof(services));
 
-            var activeTimeRangeBuilder = new ActiveTimeRangeBuilder(serviceBusBuilder.Services);
+            var activeTimeRangeBuilder = new ActiveTimeRangeBuilder(services);
 
             builder?.Invoke(activeTimeRangeBuilder);
 
-            serviceBusBuilder.Services.TryAddSingleton<ActiveTimeRangeObserver, ActiveTimeRangeObserver>();
+            services.TryAddSingleton<ActiveTimeRangeObserver, ActiveTimeRangeObserver>();
             
-            serviceBusBuilder.Services.AddOptions<ActiveTimeRangeOptions>().Configure(options =>
+            services.AddOptions<ActiveTimeRangeOptions>().Configure(options =>
             {
                 options.ActiveFromTime = activeTimeRangeBuilder.Options.ActiveFromTime;
                 options.ActiveToTime = activeTimeRangeBuilder.Options.ActiveToTime;
             });
 
-            serviceBusBuilder.Services.AddPipelineModule<ActiveTimeRangeModule>();
+            services.AddPipelineModule<ActiveTimeRangeModule>();
 
-            return serviceBusBuilder;
+            return services;
         }
     }
 }
