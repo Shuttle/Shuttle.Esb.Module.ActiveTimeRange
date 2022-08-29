@@ -6,7 +6,7 @@ using Shuttle.Core.Pipelines;
 
 namespace Shuttle.Esb.Module.ActiveTimeRange
 {
-    public static class ServiceBusBuilderExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddActiveTimeRangeModule(this IServiceCollection services,
             Action<ActiveTimeRangeBuilder> builder = null)
