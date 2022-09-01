@@ -1,4 +1,6 @@
-﻿using Shuttle.Core.Pipelines;
+﻿using System;
+using System.Threading.Tasks;
+using Shuttle.Core.Pipelines;
 using Shuttle.Core.Threading;
 
 namespace Shuttle.Esb.Module.ActiveTimeRange
@@ -23,7 +25,13 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
 			pipelineEvent.Pipeline.Abort();
 
-            ThreadSleep.While(sleep, pipelineEvent.Pipeline.State.GetCancellationToken());
+			try
+			{
+				Task.Delay(sleep, pipelineEvent.Pipeline.State.GetCancellationToken()).Wait(pipelineEvent.Pipeline.State.GetCancellationToken());
+			}
+			catch (OperationCanceledException)
+			{
+			}
 		}
 	}
 }

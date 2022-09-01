@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Options;
 using Shuttle.Core.Contract;
 using Shuttle.Core.Pipelines;
 
@@ -7,27 +8,27 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
     public class ActiveTimeRangeModule
     {
         private readonly ActiveTimeRange _activeTimeRange;
-        private readonly string _shutdownPipelineName = typeof(ShutdownPipeline).FullName;
-        private readonly string _startupPipelineName = typeof(StartupPipeline).FullName;
+        private readonly Type _shutdownPipelineType = typeof(ShutdownPipeline);
+        private readonly Type _startupPipelineType = typeof(StartupPipeline);
 
-        public ActiveTimeRangeModule(IPipelineFactory pipelineFactory,
-            IActiveTimeRangeConfiguration activeTimeRangeConfiguration)
+        public ActiveTimeRangeModule(IOptions<ActiveTimeRangeOptions> activeTimeRangeOptions, IPipelineFactory pipelineFactory)
         {
+            Guard.AgainstNull(activeTimeRangeOptions, nameof(activeTimeRangeOptions));
+            Guard.AgainstNull(activeTimeRangeOptions.Value, nameof(activeTimeRangeOptions.Value));
             Guard.AgainstNull(pipelineFactory, nameof(pipelineFactory));
-            Guard.AgainstNull(activeTimeRangeConfiguration, nameof(activeTimeRangeConfiguration));
 
-            _activeTimeRange = activeTimeRangeConfiguration.CreateActiveTimeRange();
+            _activeTimeRange = new ActiveTimeRange(activeTimeRangeOptions.Value.ActiveFromTime, activeTimeRangeOptions.Value.ActiveToTime);
 
             pipelineFactory.PipelineCreated += PipelineCreated;
         }
 
         private void PipelineCreated(object sender, PipelineEventArgs e)
         {
-            var pipelineName = e.Pipeline.GetType().FullName ?? string.Empty;
+            var pipelineType = e.Pipeline.GetType();
 
-            if (pipelineName.Equals(_startupPipelineName, StringComparison.InvariantCultureIgnoreCase)
+            if (pipelineType == _startupPipelineType
                 ||
-                pipelineName.Equals(_shutdownPipelineName, StringComparison.InvariantCultureIgnoreCase))
+                pipelineType == _shutdownPipelineType)
             {
                 return;
             }
