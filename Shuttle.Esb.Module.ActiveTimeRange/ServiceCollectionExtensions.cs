@@ -17,7 +17,7 @@ namespace Shuttle.Esb.Module.ActiveTimeRange
 
             builder?.Invoke(activeTimeRangeBuilder);
 
-            services.TryAddSingleton<ActiveTimeRangeObserver, ActiveTimeRangeObserver>();
+            services.TryAddSingleton<ActiveTimeRangeObserver>();
             
             services.AddOptions<ActiveTimeRangeOptions>().Configure(options =>
             {
