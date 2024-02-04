@@ -1,4 +1,4 @@
-Please use [Active Time Range](https://github.com/Shuttle/Shuttle.Esb.ActiveTimeRange) hosted service extension.
+Please use the new [Active Time Range](https://github.com/Shuttle/Shuttle.Esb.ActiveTimeRange) hosted service extension.
 
 # Active Time Range
 
